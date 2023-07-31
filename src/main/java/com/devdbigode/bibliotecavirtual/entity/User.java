@@ -1,8 +1,11 @@
 package com.devdbigode.bibliotecavirtual.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -14,6 +17,9 @@ public class User implements Serializable{
     private String document;
     private String email; 
     private String senha; 
+
+    @DBRef(lazy = true)
+    private List<Order> orders = new ArrayList<>(); 
     
     public User() {
     }
@@ -67,6 +73,15 @@ public class User implements Serializable{
     }
     
     
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+   
 
     @Override
     public int hashCode() {
@@ -93,5 +108,4 @@ public class User implements Serializable{
         return true;
     }
 
-   
 }

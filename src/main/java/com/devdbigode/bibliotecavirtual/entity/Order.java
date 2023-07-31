@@ -1,11 +1,16 @@
 package com.devdbigode.bibliotecavirtual.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.devdbigode.bibliotecavirtual.entity.dto.ItemDTO;
+import com.devdbigode.bibliotecavirtual.entity.dto.UserDTO;
 import com.devdbigode.bibliotecavirtual.entity.enums.OrderStatus;
 
 @Document
@@ -15,14 +20,20 @@ public class Order implements Serializable{
     private String id; 
     private Date moment; 
     private OrderStatus orderStatus;
+    private Double price; 
+
+    private UserDTO user; 
+
+    private List<ItemDTO> listItens = new ArrayList<>(); 
     
     public Order() {
     }
 
-    public Order(String id, Date moment, OrderStatus orderStatus) {
+    public Order(String id, Date moment, OrderStatus orderStatus, UserDTO user) {
         this.id = id;
         this.moment = moment;
         this.orderStatus = orderStatus;
+        this.user = user; 
     }
 
     public String getId() {
@@ -47,6 +58,33 @@ public class Order implements Serializable{
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+    public List<ItemDTO> getListItens() {
+        return listItens;
+    }
+
+    public void setListItens(List<ItemDTO> listItens) {
+        this.listItens = listItens;
+    }
+
+    public void subTotal(){
+        Double priceTotal = 0.0; 
+
+        for (ItemDTO itemDTO : listItens) {
+            priceTotal += itemDTO.getPrice();  
+        }
+
+        this.price = priceTotal; 
     }
 
     @Override
