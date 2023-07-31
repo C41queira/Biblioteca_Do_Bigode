@@ -9,7 +9,8 @@ public class UserDTO implements Serializable{
     private String id;
     private String name; 
     private String document;
-    private String email; 
+    private String email;
+    private String senha;  
 
     public UserDTO() {
     }
@@ -19,6 +20,7 @@ public class UserDTO implements Serializable{
         this.name = obj.getName();
         this.document = obj.getDocument();
         this.email = obj.getEmail(); 
+        this.senha = obj.getSenha(); 
     }
 
     public String getId() {
@@ -51,6 +53,14 @@ public class UserDTO implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+    
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
