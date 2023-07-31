@@ -1,5 +1,6 @@
 package com.devdbigode.bibliotecavirtual.config;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.devdbigode.bibliotecavirtual.entity.Book;
+import com.devdbigode.bibliotecavirtual.entity.Order;
 import com.devdbigode.bibliotecavirtual.entity.User;
+import com.devdbigode.bibliotecavirtual.entity.enums.OrderStatus;
 import com.devdbigode.bibliotecavirtual.repository.BookRepository;
+import com.devdbigode.bibliotecavirtual.repository.OrderRepository;
 import com.devdbigode.bibliotecavirtual.repository.UserRepository;
 
 @Configuration
@@ -16,14 +20,21 @@ public class ConfigTest implements CommandLineRunner{
     
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public void run(String... args) throws Exception {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
         userRepository.deleteAll();
         bookRepository.deleteAll();
+        orderRepository.deleteAll();
         
         
         User u1 = new User(null, "Paulo", "532.124.557-29", 
@@ -34,9 +45,11 @@ public class ConfigTest implements CommandLineRunner{
         Book b2 = new Book(null, "A Danca dos Dragoes. As Cronicas de Gelo e Fogo - Livro 5", 92.90, 832, "Fantasia/Medieval", 
         "A serie fantastica que conquistou leitores e telespectadores esta de volta: As Cronicas de Gelo e Fogo.");
 
+        Order o1 = new Order(null, sdf.parse("23/08/2022"), OrderStatus.PAID);
 
         userRepository.save(u1);
-        bookRepository.saveAll(Arrays.asList(b1, b2)); 
+        bookRepository.saveAll(Arrays.asList(b1, b2));
+        orderRepository.save(o1); 
     } 
     
 }
