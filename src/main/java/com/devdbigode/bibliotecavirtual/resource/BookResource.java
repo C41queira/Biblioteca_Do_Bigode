@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devdbigode.bibliotecavirtual.entity.Book;
 import com.devdbigode.bibliotecavirtual.entity.dto.BookDTO;
+import com.devdbigode.bibliotecavirtual.resource.util.URL;
 import com.devdbigode.bibliotecavirtual.service.BookService;
 
 @RestController
@@ -38,6 +40,13 @@ public class BookResource {
     public ResponseEntity<BookDTO> findById(@PathVariable String id){
         Book Book = service.findById(id); 
         return ResponseEntity.ok().body(new BookDTO(Book)); 
+    }
+
+    @GetMapping(value = "/booksearch")
+    public ResponseEntity<List<Book>> findByBooks(@RequestParam(value="text", defaultValue="") String text){
+        text = URL.decodeParam(text);
+        List<Book> list = service.findByBooks(text); 
+        return ResponseEntity.ok().body(list); 
     }
 
     @PostMapping

@@ -42,8 +42,6 @@ public class ConfigTest implements CommandLineRunner{
         User u1 = new User(null, "Paulo", "532.124.557-29", 
         "paulinhooliveira@gmail.com", "55dft@S");
 
-        //userRepository.save(u1);
-
         Book b1 = new Book(null, "A Lenda de Ruff Ghanor Volume 1", 54.90, 318, "Fantasia/Medieval", 
         "Entretanto nos confins de uma terra inclemente, assolada por monstros e governada pelo terrível dragão Zamir, ergue-se o mosteiro de São Arnaldo. Os clérigos tentam viver em paz, sob o jugo do tirano, quando encontram um estranho garoto. Uma criança selvagem, dotada de poderes misteriosos, que luta como um adulto. Seu nome é como um rugido: Ruff Ghanor.");
         Book b2 = new Book(null, "A Danca dos Dragoes. As Cronicas de Gelo e Fogo - Livro 5", 92.90, 832, "Fantasia/Medieval", 

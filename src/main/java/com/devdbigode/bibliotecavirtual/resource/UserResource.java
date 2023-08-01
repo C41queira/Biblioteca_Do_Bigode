@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devdbigode.bibliotecavirtual.entity.Order;
 import com.devdbigode.bibliotecavirtual.entity.User;
 import com.devdbigode.bibliotecavirtual.entity.dto.UserDTO;
 import com.devdbigode.bibliotecavirtual.service.UserService;
@@ -38,6 +39,13 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         User user = service.findById(id); 
         return ResponseEntity.ok().body(new UserDTO(user)); 
+    }
+
+    @GetMapping(value = "/{id}/orders")
+    public ResponseEntity<List<Order>> findOrders(@PathVariable String id){
+        User user = service.findById(id); 
+        List<Order> list = user.getOrders(); 
+        return ResponseEntity.ok().body(list); 
     }
 
     @PostMapping

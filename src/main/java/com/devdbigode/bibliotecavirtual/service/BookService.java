@@ -41,6 +41,14 @@ public class BookService {
         return bookRepository.save(newObj);
     }
 
+    public List<Book> findByBooks(String text){
+        return bookRepository.searchBooks(text); 
+    }
+
+    /*public List<Book> findByPrice(Double price){
+        return bookRepository.searchPrice(price); 
+    }*/
+
     public void updateData(Book newObj, Book obj){
         newObj.setTitle(obj.getTitle());
         newObj.setPrice(obj.getPrice());

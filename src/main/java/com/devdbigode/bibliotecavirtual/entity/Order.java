@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.devdbigode.bibliotecavirtual.entity.dto.ItemDTO;
@@ -20,7 +19,7 @@ public class Order implements Serializable{
     private String id; 
     private Date moment; 
     private OrderStatus orderStatus;
-    private Double price; 
+    private Double price = 0.0; 
 
     private UserDTO user; 
 
@@ -77,6 +76,15 @@ public class Order implements Serializable{
         this.listItens = listItens;
     }
 
+    
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    } 
+
     public void subTotal(){
         Double priceTotal = 0.0; 
 
@@ -110,7 +118,6 @@ public class Order implements Serializable{
         } else if (!id.equals(other.id))
             return false;
         return true;
-    } 
+    }
 
-    
 }
