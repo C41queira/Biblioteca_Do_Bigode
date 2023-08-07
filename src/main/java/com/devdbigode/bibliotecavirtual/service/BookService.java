@@ -45,9 +45,9 @@ public class BookService {
         return bookRepository.searchBooks(text); 
     }
 
-    /*public List<Book> findByPrice(Double price){
-        return bookRepository.searchPrice(price); 
-    }*/
+    public List<Book> findByPrice(Double minPrice, Double maxPrice){
+        return bookRepository.searchPrice(minPrice, maxPrice); 
+    }
 
     public void updateData(Book newObj, Book obj){
         newObj.setTitle(obj.getTitle());

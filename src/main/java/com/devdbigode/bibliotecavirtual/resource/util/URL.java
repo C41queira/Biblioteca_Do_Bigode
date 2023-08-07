@@ -11,4 +11,15 @@ public class URL {
 			return "";
 		}
 	}
+
+	public static Double convertPrice(String price, Double defaultPrice){
+
+		Double value = Double.parseDouble(price); 
+
+		if (value == null){
+			return defaultPrice;
+		} else {
+			return value; 
+		}
+	}
 }

@@ -49,6 +49,20 @@ public class BookResource {
         return ResponseEntity.ok().body(list); 
     }
 
+    @GetMapping(value = "/searchprice")
+    public ResponseEntity<List<Book>> findByPrice(@RequestParam(value="minPrice", defaultValue="") String minPrice,
+    @RequestParam(value="maxPrice", defaultValue="") String maxPrice){
+        
+        Double min = URL.convertPrice(minPrice, 0.0);
+        Double max = URL.convertPrice(maxPrice, 1000.0);
+
+        List<Book> list = service.findByPrice(min, max);
+
+        return ResponseEntity.ok().body(list); 
+    }
+
+
+
     @PostMapping
     public ResponseEntity<Void> inserEntity(@RequestBody BookDTO objDto){
         Book Book = service.fromDto(objDto); 

@@ -12,6 +12,6 @@ public interface BookRepository extends MongoRepository<Book, String>{
     @Query("{$or: [{'title': { $regex: ?0, $options: 'i' }} ,{'theme': { $regex: ?0, $options: 'i' }}]}")
     List<Book> searchBooks(String text);
 
-    /*@Query("{ 'price': { $regex: ?0, $options: 'i' } }")
-    List<Book> searchPrice(Double price); */
+    @Query("{$and: [{ 'price': {$gte: ?0}}, { 'price': {$lte: ?1}}]}")
+    List<Book> searchPrice(Double minPrice, Double maxPrice);
 }
